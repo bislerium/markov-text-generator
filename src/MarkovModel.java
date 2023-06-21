@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MarkovModel {
+public class MarkovModel extends AbstractMarkovModel{
+
     private int numberOfChar;
-    private String myText;
-    private Random myRandom;
 
     public MarkovModel(int num) {
         numberOfChar = num;
@@ -17,22 +16,6 @@ public class MarkovModel {
 
     public void setTraining(String s){
         myText = s.trim();
-    }
-
-    public ArrayList<String> getFollows(String key) {
-        ArrayList<String> followList = new ArrayList<String>();
-        int index = myText.indexOf(key);
-        int keyLen = key.length();
-        while (index != myText.length()-keyLen) {
-            if (index == -1) {
-                break;
-            }
-            String character = myText.substring(keyLen + index, index + keyLen + 1);
-            followList.add(character);
-            index = index+1;
-            index = myText.indexOf(key,index);
-        }
-        return followList;
     }
 
     public String getRandomText(int numChars){
@@ -55,6 +38,10 @@ public class MarkovModel {
         }
 
         return sb.toString();
+    }
+
+    public String toString() {
+        return  "MarkovModel of order " + numberOfChar;
     }
 }
 

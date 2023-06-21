@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MarkovFour {
-
-    private String myText;
-    private Random myRandom;
+public class MarkovFour extends AbstractMarkovModel{
 
     public MarkovFour() {
         myRandom = new Random();
@@ -18,21 +15,6 @@ public class MarkovFour {
         myText = s.trim();
     }
 
-    public ArrayList<String> getFollows(String key) {
-        ArrayList<String> followList = new ArrayList<String>();
-        int index = myText.indexOf(key);
-        int keyLen = key.length();
-        while (index != myText.length()-keyLen) {
-            if (index == -1) {
-                break;
-            }
-            String character = myText.substring(keyLen + index, index + keyLen + 1);
-            followList.add(character);
-            index = index+1;
-            index = myText.indexOf(key,index);
-        }
-        return followList;
-    }
 
     public String getRandomText(int numChars){
         if (myText == null){
@@ -54,6 +36,10 @@ public class MarkovFour {
         }
 
         return sb.toString();
+    }
+
+    public String toString() {
+        return  "MarkovModel of order 4.";
     }
 }
 
